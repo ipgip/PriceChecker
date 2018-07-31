@@ -82,41 +82,5 @@ namespace web.Properties {
                 this["CS"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Srvr=\"srvnew\";Ref=\"utrus_beckup\";Usr=\"Admin\";Pwd=\"9780100941\";")]
-        public string Параметр {
-            get {
-                return ((string)(this["Параметр"]));
-            }
-            set {
-                this["Параметр"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("File=\"C:\\Users\\ipigp\\Documents\\bazby\";Usr=\"Адимн\";Pwd=\"1\";")]
-        public string Параметр1 {
-            get {
-                return ((string)(this["Параметр1"]));
-            }
-            set {
-                this["Параметр1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Srvr=\"srvnew\";Ref=\"utrus\";Usr=\"Покупатель\";Pwd=\"1\";")]
-        public string Параметр2 {
-            get {
-                return ((string)(this["Параметр2"]));
-            }
-            set {
-                this["Параметр2"] = value;
-            }
-        }
     }
 }

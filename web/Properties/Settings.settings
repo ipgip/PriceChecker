@@ -17,14 +17,5 @@
     <Setting Name="CS" Type="System.String" Scope="User">
       <Value Profile="(Default)">Srvr="srvnew";Ref="utrus_beckup";Usr="Admin";Pwd="9780100941";</Value>
     </Setting>
-    <Setting Name="Параметр" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Srvr="srvnew";Ref="utrus_beckup";Usr="Admin";Pwd="9780100941";</Value>
-    </Setting>
-    <Setting Name="Параметр1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">File="C:\Users\ipigp\Documents\bazby";Usr="Адимн";Pwd="1";</Value>
-    </Setting>
-    <Setting Name="Параметр2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Srvr="srvnew";Ref="utrus";Usr="Покупатель";Pwd="1";</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

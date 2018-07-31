@@ -120,7 +120,7 @@ namespace web
         private void PictureBox2_Click(object sender, EventArgs e)
         {
             Bazlabel.Text = "Поднесите штрихкод товара к сканеру";
-            Bazlabel.Focus();
+            nullButton.Focus();
 
             Baz.Visible = true;
             tableLayoutPanel1.Visible = false;
@@ -184,9 +184,8 @@ namespace web
         {
             if ((e.KeyCode == Keys.Enter) && (buf.Length > 0))
             {
-                Display(sender as Label, buf.ToString());
+                Display(Bazlabel, buf.ToString());
                 FindByBarcode(buf.ToString());
-
                 buf = new StringBuilder();
             }
             else
@@ -194,8 +193,7 @@ namespace web
                 if (char.IsDigit((char)e.KeyCode))
                 {
                     buf.Append((char)e.KeyCode);
-                    Display(sender as Label, buf.ToString());
-
+                    Display(Bazlabel, buf.ToString());
                 }
             }
             //e.Handled = true;
@@ -290,16 +288,14 @@ namespace web
                     while (l.Следующий())
                     {
                         //Title
-                        label1.Text = l.CсылкаНаНоменклатуру.Наименование;
+                        label1.Text = $"{l.CсылкаНаНоменклатуру.Код} {l.CсылкаНаНоменклатуру.Наименование}";
                         label1.TextAlign = ContentAlignment.TopLeft;
 
                         // Picture
-                        // картинка
                         dynamic pp = null;
                         try
                         {
-                            dynamic r = Connection.Обработки.APPLIX_RU_ХДВИ_ЗМ.Создать();
-                            pp = r.ХранилищеДополнительнойИнформации_ПолучитьДанныеФайла(l.CсылкаНаНоменклатуру.ОсновноеИзображение);
+                            pp = Connection.Обработки.APPLIX_RU_ХДВИ_ЗМ.Создать().ХранилищеДополнительнойИнформации_ПолучитьДанныеФайла(l.CсылкаНаНоменклатуру.ОсновноеИзображение);
                         }
                         catch (Exception)
                         {
@@ -311,10 +307,14 @@ namespace web
                             Bitmap pp1 = PictureFrom1C(Connection, pp);
 
                             pictureBox3.Image = pp1;
+                            pictureBox3.Dock = DockStyle.Fill;
+                            tableLayoutPanel1.SetColumnSpan(pictureBox3, 2);
+                            tableLayoutPanel1.SetRowSpan(pictureBox3, 1);
                         }
                         else
                         {
                             pictureBox3.Image = Properties.Resources.bazby;
+                            pictureBox3.Dock = DockStyle.Fill;
                             tableLayoutPanel1.SetColumnSpan(pictureBox3, 2);
                             tableLayoutPanel1.SetRowSpan(pictureBox3, 2);
                         }
@@ -322,37 +322,43 @@ namespace web
 
                         // Цена
                         dynamic P = Connection.NewObject("Query");
-                        P.Text = "select Цена " +
+                        P.Text = "select ЕстьNull(Цена,0) Price " +
                                  "from РегистрСведений.ЦеныНоменклатуры.СрезПоследних(&ДатаПолучения) " +
                                  "where Номенклатура = &Goods and ТипЦен = &TP;";
                         P.УстановитьПараметр("ДатаПолучения", DateTime.Today);
                         P.УстановитьПараметр("Goods", l.CсылкаНаНоменклатуру);
                         P.УстановитьПараметр("TP", TP);
+                        decimal Price = 0m;
                         dynamic PRes = P.Выполнить().Выбрать();
                         while (PRes.Следующий())
                         {
-                            label3.Text = $"Цена: {PRes.Цена:C}";
+                            Price = PRes.Price;
+                            label3.Text = $"Цена: {Price:C2}";
                         }
                         // Скидки
                         dynamic DiscountQuery = Connection.NewObject("Query");
                         DiscountQuery.Text =
-                        "select ЕстьNull(sum(ПроцентСкидкиНаценки),0) as Dis " + 
-                        "from  РегистрСведений.СкидкиНаценкиНоменклатуры.СрезПоследних " + 
+                        "select ЕстьNull(sum(ПроцентСкидкиНаценки),0) as Dis " +
+                        "from  РегистрСведений.СкидкиНаценкиНоменклатуры.СрезПоследних " +
                         "where Номенклатура.Ссылка = &Goods " +
-                        "    and Активность ";
+                        "   and Активность " +
+                        "	and ДатаОкончания >= &Date " +
+                        "   and Условие = Значение(Перечисление.УсловияСкидкиНаценки.БезУсловий) ";
                         DiscountQuery.УстановитьПараметр("Goods", l.CсылкаНаНоменклатуру);
+                        DiscountQuery.УстановитьПараметр("Date", DateTime.Today);
                         dynamic DiscountRes = DiscountQuery.Execute().Select();
 
                         decimal Discount = 0;
                         if (DiscountRes.Next())
                         {
                             Discount = DiscountRes.Dis;
-                            DiscountLabel.Text = "Цена со скидкой:"+Environment.NewLine+$"{((100 - Discount) / 100) * PRes.Цена:C2}";
-                            DiscountLabel.Visible = true;
+                            DiscountLabel.Text = "Цена со скидкой:" + Environment.NewLine + $"{((100 - Discount) / 100 * Price):C2}";
                         }
+                        DiscountLabel.Visible = (Discount != 0);
 
                         Baz.Visible = false;
                         tableLayoutPanel1.Visible = true;
+                        timer1.Interval = Properties.Settings.Default.Duration;
                         timer1.Start();
                     }
                 }
@@ -378,6 +384,7 @@ namespace web
             finally
             {
                 Cursor = Cursors.Default;
+                nullButton.Focus();
                 //if (Connection != null)
                 //{
                 //    Connection = null;
@@ -437,8 +444,8 @@ namespace web
             AboutBox1 aboutBox1 = new AboutBox1();
             if (aboutBox1.ShowDialog() == DialogResult.OK)
             {
-                aboutBox1.Close();
-                label1.Focus();
+                nullButton.Focus();
+                //aboutBox1.Close();
             }
         }
 
