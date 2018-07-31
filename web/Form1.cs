@@ -288,7 +288,8 @@ namespace web
                     while (l.Следующий())
                     {
                         //Title
-                        label1.Text = $"{l.CсылкаНаНоменклатуру.Код} {l.CсылкаНаНоменклатуру.Наименование}";
+                        label1.Text = $"{l.CсылкаНаНоменклатуру.Наименование}";
+                        //label1.Text = $"{l.CсылкаНаНоменклатуру.Код} {l.CсылкаНаНоменклатуру.Наименование}";
                         label1.TextAlign = ContentAlignment.TopLeft;
 
                         // Picture
@@ -339,11 +340,11 @@ namespace web
                         dynamic DiscountQuery = Connection.NewObject("Query");
                         DiscountQuery.Text =
                         "select ЕстьNull(sum(ПроцентСкидкиНаценки),0) as Dis " +
-                        "from  РегистрСведений.СкидкиНаценкиНоменклатуры.СрезПоследних " +
+                        "from  РегистрСведений.СкидкиНаценкиНоменклатуры " +
                         "where Номенклатура.Ссылка = &Goods " +
                         "   and Активность " +
                         "	and ДатаОкончания >= &Date " +
-                        "   and Условие = Значение(Перечисление.УсловияСкидкиНаценки.БезУсловий) ";
+                        "   and Условие = Значение(Перечисление.УсловияСкидкиНаценки.ПоКоличествуТовара) ";
                         DiscountQuery.УстановитьПараметр("Goods", l.CсылкаНаНоменклатуру);
                         DiscountQuery.УстановитьПараметр("Date", DateTime.Today);
                         dynamic DiscountRes = DiscountQuery.Execute().Select();

@@ -15,7 +15,7 @@
       <Value Profile="(Default)">30000</Value>
     </Setting>
     <Setting Name="CS" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Srvr="srvnew";Ref="utrus_beckup";Usr="Admin";Pwd="9780100941";</Value>
+      <Value Profile="(Default)">Srvr="srvnew";Ref="utrus";Usr="Admin";Pwd="9780100941";</Value>
     </Setting>
   </Settings>
 </SettingsFile>

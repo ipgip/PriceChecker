@@ -73,7 +73,7 @@ namespace web.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Srvr=\"srvnew\";Ref=\"utrus_beckup\";Usr=\"Admin\";Pwd=\"9780100941\";")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Srvr=\"srvnew\";Ref=\"utrus\";Usr=\"Admin\";Pwd=\"9780100941\";")]
         public string CS {
             get {
                 return ((string)(this["CS"]));
