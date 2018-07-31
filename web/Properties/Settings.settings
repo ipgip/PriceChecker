@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="web.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PriceType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Розничная</Value>
+    </Setting>
+    <Setting Name="Site" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://bazby.ru</Value>
+    </Setting>
+    <Setting Name="License" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BFEBFBFF000206A7</Value>
+    </Setting>
+    <Setting Name="Duration" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30000</Value>
+    </Setting>
+    <Setting Name="CS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Srvr="srvnew";Ref="utrus_beckup";Usr="Admin";Pwd="9780100941";</Value>
+    </Setting>
+    <Setting Name="Параметр" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Srvr="srvnew";Ref="utrus_beckup";Usr="Admin";Pwd="9780100941";</Value>
+    </Setting>
+    <Setting Name="Параметр1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">File="C:\Users\ipigp\Documents\bazby";Usr="Адимн";Pwd="1";</Value>
+    </Setting>
+    <Setting Name="Параметр2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Srvr="srvnew";Ref="utrus";Usr="Покупатель";Pwd="1";</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
